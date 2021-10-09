@@ -31,6 +31,7 @@ jobs:
         run: melos bootstrap
     
   analyze:
+    needs: get_dependencies
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
@@ -42,6 +43,7 @@ jobs:
             pub publish --dry-run
 
   pub_get_check:
+    needs: get_dependencies
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
@@ -51,6 +53,7 @@ jobs:
             "flutter pub get"
 
   format:
+    needs: get_dependencies
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
@@ -84,6 +87,7 @@ jobs:
           ./.github/workflows/scripts/validate-formatting.sh
           
   test_and_coverage:
+    needs: get_dependencies
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
