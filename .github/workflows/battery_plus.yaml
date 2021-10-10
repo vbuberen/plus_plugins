@@ -36,7 +36,7 @@ jobs:
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Build Example"
-        run: ./.github/workflows/scripts/build-examples.sh ios ./battery_plus_macos/lib/main.dart
+        run: ./.github/workflows/scripts/build-examples.sh ios ./lib/main.dart
 
   macos:
     runs-on: macos-latest
@@ -49,7 +49,7 @@ jobs:
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Build Example"
-        run: ./.github/workflows/scripts/build-examples.sh macos ./battery_plus_macos/lib/main.dart
+        run: ./.github/workflows/scripts/build-examples.sh macos
 
   linux:
     runs-on: ubuntu-latest
@@ -62,7 +62,7 @@ jobs:
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Build Example"
-        run: ./.github/workflows/scripts/build-examples.sh linux ./battery_plus_linux/lib/main.dart
+        run: ./.github/workflows/scripts/build-examples.sh linux ./battery_plus_linux/lib/battery_plus_linux.dart
 
   windows:
     runs-on: ubuntu-latest
@@ -75,7 +75,7 @@ jobs:
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Build Example"
-        run: ./.github/workflows/scripts/build-examples.sh windows ./battery_plus_windows/lib/main.dart
+        run: ./.github/workflows/scripts/build-examples.sh windows ./battery_plus_windows/lib/battery_plus_windows.dart
 
   web:
     runs-on: ubuntu-latest
@@ -88,4 +88,4 @@ jobs:
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Build Example"
-        run: ./.github/workflows/scripts/build-examples.sh web ./battery_plus_web/lib/main.dart
+        run: ./.github/workflows/scripts/build-examples.sh web ./battery_plus_web/lib/battery_plus_web.dart
