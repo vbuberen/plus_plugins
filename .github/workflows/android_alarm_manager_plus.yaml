@@ -23,4 +23,4 @@ jobs:
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Build Example"
-        run: ./.github/workflows/scripts/build-example.sh android ./lib/main.dart
+        run: ./.github/workflows/scripts/build-examples.sh android ./lib/main.dart
