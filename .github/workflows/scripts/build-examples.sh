@@ -2,12 +2,12 @@
 
 DEFAULT_TARGET="./test_driver/MELOS_PARENT_PACKAGE_NAME_e2e.dart"
 
-JOB_NAME=$1
+ACTION=$1
 TARGET_FILE=${2:-$DEFAULT_TARGET}
 
 melos bootstrap --scope="$PLUGIN_SCOPE"
 
-if [ "$JOB_NAME" == "android" ]
+if [ "$ACTION" == "android" ]
 then
   melos exec -c 1 --scope="$PLUGIN_EXAMPLE_SCOPE" -- \
     flutter build apk $FLUTTER_COMMAND_FLAGS --debug --target="$TARGET_FILE" --dart-define=CI=true --no-android-gradle-daemon
@@ -17,35 +17,35 @@ then
   exit $MELOS_EXIT_CODE
 fi
 
-if [ "$JOB_NAME" == "ios" ]
+if [ "$ACTION" == "ios" ]
 then
   melos exec -c 1 --scope="$PLUGIN_EXAMPLE_SCOPE" -- \
     flutter build ios $FLUTTER_COMMAND_FLAGS --no-codesign --simulator --debug --target="$TARGET_FILE" --dart-define=CI=true
   exit
 fi
 
-if [ "$JOB_NAME" == "macos" ]
+if [ "$ACTION" == "macos" ]
 then
   melos exec -c 1 --scope="$PLUGIN_EXAMPLE_SCOPE" -- \
     flutter config --enable-macos-desktop && flutter build macos $FLUTTER_COMMAND_FLAGS --debug --target="$TARGET_FILE" --dart-define=CI=true
   exit
 fi
 
-if [ "$JOB_NAME" == "linux" ]
+if [ "$ACTION" == "linux" ]
 then
   melos exec -c 1 --scope="$PLUGIN_EXAMPLE_SCOPE" -- \
     flutter config --enable-linux-desktop && flutter build linux $FLUTTER_COMMAND_FLAGS --debug --target="$TARGET_FILE" --dart-define=CI=true
   exit
 fi
 
-if [ "$JOB_NAME" == "windows" ]
+if [ "$ACTION" == "windows" ]
 then
   melos exec -c 1 --scope="$PLUGIN_EXAMPLE_SCOPE" -- \
     flutter config --enable-windows-desktop && flutter build windows $FLUTTER_COMMAND_FLAGS --debug --target="$TARGET_FILE" --dart-define=CI=true
   exit
 fi
 
-if [ "$JOB_NAME" == "web" ]
+if [ "$ACTION" == "web" ]
 then
   melos exec -c 1 --scope="$PLUGIN_EXAMPLE_SCOPE" -- \
     flutter build web $FLUTTER_COMMAND_FLAGS --debug --target="$TARGET_FILE" --dart-define=CI=true
