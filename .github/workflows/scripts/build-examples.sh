@@ -27,21 +27,24 @@ fi
 if [ "$ACTION" == "macos" ]
 then
   melos exec -c 1 --scope="$PLUGIN_EXAMPLE_SCOPE" -- \
-    flutter config --enable-macos-desktop && flutter build macos $FLUTTER_COMMAND_FLAGS --debug --target="$TARGET_FILE" --dart-define=CI=true
+    flutter config --enable-macos-desktop \
+    flutter build macos $FLUTTER_COMMAND_FLAGS --debug --target="$TARGET_FILE" --dart-define=CI=true
   exit
 fi
 
 if [ "$ACTION" == "linux" ]
 then
   melos exec -c 1 --scope="$PLUGIN_EXAMPLE_SCOPE" -- \
-    flutter config --enable-linux-desktop && flutter build linux $FLUTTER_COMMAND_FLAGS --debug --target="$TARGET_FILE" --dart-define=CI=true
+    flutter config --enable-linux-desktop \
+    flutter build linux $FLUTTER_COMMAND_FLAGS --debug --target="$TARGET_FILE" --dart-define=CI=true
   exit
 fi
 
 if [ "$ACTION" == "windows" ]
 then
   melos exec -c 1 --scope="$PLUGIN_EXAMPLE_SCOPE" -- \
-    flutter config --enable-windows-desktop && flutter build windows $FLUTTER_COMMAND_FLAGS --debug --target="$TARGET_FILE" --dart-define=CI=true
+    flutter config --enable-windows-desktop \
+    flutter build windows $FLUTTER_COMMAND_FLAGS --debug --target="$TARGET_FILE" --dart-define=CI=true
   exit
 fi
 
