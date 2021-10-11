@@ -23,7 +23,7 @@ jobs:
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Build Example"
-        run: ./.github/workflows/scripts/build-examples.sh android ./battery_plus/battery_plus/example/lib/main.dart
+        run: ./.github/workflows/scripts/build-examples.sh android ./lib/main.dart
 
   ios:
     runs-on: macos-latest
@@ -36,7 +36,7 @@ jobs:
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Build Example"
-        run: ./.github/workflows/scripts/build-examples.sh ios ./battery_plus/battery_plus/example/lib/main.dart
+        run: ./.github/workflows/scripts/build-examples.sh ios ./lib/main.dart
 
   macos:
     runs-on: macos-latest
