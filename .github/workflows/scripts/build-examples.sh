@@ -5,7 +5,7 @@ DEFAULT_TARGET="./test_driver/MELOS_PARENT_PACKAGE_NAME_e2e.dart"
 ACTION=$1
 TARGET_FILE=${2:-$DEFAULT_TARGET}
 
-melos bootstrap -v --scope="$PLUGIN_SCOPE"
+melos bootstrap --verbose --scope="$PLUGIN_SCOPE"
 
 if [ "$ACTION" == "android" ]
 then
@@ -51,6 +51,6 @@ fi
 if [ "$ACTION" == "web" ]
 then
   melos exec -c 1 --scope="$PLUGIN_EXAMPLE_SCOPE" \
-    -- flutter build web $FLUTTER_COMMAND_FLAGS --d --target="$TARGET_FILE" --dart-define=CI=true
+    -- flutter build web $FLUTTER_COMMAND_FLAGS --target="$TARGET_FILE" --dart-define=CI=true
   exit
 fi
