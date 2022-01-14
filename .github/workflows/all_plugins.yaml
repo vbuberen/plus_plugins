@@ -22,13 +22,7 @@ jobs:
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v2
-      - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
-      - name: "Install Tools"
-        run: |
-          ./.github/workflows/scripts/install-tools.sh
-      - name: "Bootstrap Workspace"
-        run: melos bootstrap
+      - uses: dart-lang/setup-dart@v1
       - name: "Run Dart Analyze"
         uses: invertase/github-action-dart-analyzer@v1
         with:
