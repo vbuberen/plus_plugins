@@ -22,7 +22,8 @@ jobs:
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v2
-      - uses: dart-lang/setup-dart@v1
+      - name: "Install Flutter"
+        run: ./.github/workflows/scripts/install-flutter.sh stable
       - name: "Install Tools"
         run: |
           ./.github/workflows/scripts/install-tools.sh
@@ -34,6 +35,7 @@ jobs:
           fatal-infos: false
           fatal-warnings: true
           annotate: true
+          working-directory: $GITHUB_PATH
 
   pub_dev_publish_check:
     name: "Check pub.dev requirements"
