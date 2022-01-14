@@ -35,6 +35,7 @@ jobs:
           fatal-infos: false
           fatal-warnings: true
           annotate: true
+          working-directory: $MELOS_ROOT_PATH
 
   pub_dev_publish_check:
     name: "Check pub.dev requirements"
