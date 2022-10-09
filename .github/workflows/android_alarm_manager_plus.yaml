@@ -58,6 +58,5 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.android-api-level }}
-          target: google_apis
           profile: Nexus 5X
           script: ./.github/workflows/scripts/integration-test.sh android android_alarm_manager_example
