@@ -31,8 +31,8 @@ jobs:
 
           # Required for Android builds
       - uses: actions/setup-java@v1
-          with:
-            java-version: "11"
+        with:
+          java-version: "11"
 
       - name: "Build Example"
         run: ./.github/workflows/scripts/build-examples.sh android ./lib/main.dart
@@ -54,8 +54,8 @@ jobs:
 
           # Required for Android builds
       - uses: actions/setup-java@v1
-          with:
-            java-version: "11"
+        with:
+          java-version: "11"
 
       - name: "Bootstrap Workspace"
         run: melos bootstrap
