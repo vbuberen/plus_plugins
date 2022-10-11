@@ -43,14 +43,6 @@ updates:
       prefix: "chore"
       include: "scope"
 
-  - package-ecosystem: "pub"
-    directory: "/packages/android_intent_plus"
-    schedule:
-      interval: "weekly"
-    commit-message:
-      prefix: "chore"
-      include: "scope"
-
  # Android Intent Plus dependencies updates config
       
   - package-ecosystem: "pub"
@@ -238,7 +230,7 @@ updates:
       include: "scope"
 
   - package-ecosystem: "pub"
-    directory: "/packages/device_info_plus/device_info_plus_macos"
+    directory: "/packages/network_info_plus/network_info_plus_macos"
     schedule:
       interval: "weekly"
     commit-message:
