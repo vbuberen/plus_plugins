@@ -51,8 +51,44 @@ updates:
       prefix: "chore"
       include: "scope"
 
+ # Android Intent Plus dependencies updates config
+      
   - package-ecosystem: "pub"
-    directory: "/packages/battery_plus"
+    directory: "/packages/android_intent_plus"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  - package-ecosystem: "pub"
+    directory: "/packages/android_intent_plus/example"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+# Battery Plus dependencies updates config
+
+  - package-ecosystem: "pub"
+    directory: "/packages/battery_plus/battery_plus"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  - package-ecosystem: "pub"
+    directory: "/packages/battery_plus/battery_plus/example"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  - package-ecosystem: "pub"
+    directory: "/packages/battery_plus/battery_plus_platform_interface"
     schedule:
       interval: "weekly"
     commit-message:
