@@ -15,22 +15,22 @@ updates:
     reviewers:
       - "vbuberen"
       
-updates:
   - package-ecosystem: "npm"
     directory: "/website"
     schedule:
       interval: "weekly"
-    prefix: "chore(website)"
+    commit-message:
+      prefix: "chore(ci)"
       include: "scope"
     reviewers:
       - "vbuberen"
       
-updates:
   - package-ecosystem: "pub"
     directory: "/packages"
     schedule:
       interval: "weekly"
-    prefix: "chore"
+    commit-message:
+      prefix: "chore(ci)"
       include: "scope"
     reviewers:
       - "vbuberen"
