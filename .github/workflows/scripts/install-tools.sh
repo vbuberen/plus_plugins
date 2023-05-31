@@ -2,6 +2,7 @@
 
 set -e
 
+flutter --version
 flutter config --no-analytics
 flutter pub global activate melos 3.0.0
 echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
