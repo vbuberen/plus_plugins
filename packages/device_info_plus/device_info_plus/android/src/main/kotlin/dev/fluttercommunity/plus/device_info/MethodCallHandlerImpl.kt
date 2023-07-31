@@ -1,11 +1,13 @@
 package dev.fluttercommunity.plus.device_info
 
 import android.content.pm.FeatureInfo
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.Display
 import android.view.WindowManager
+import androidx.annotation.RequiresPermission
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
@@ -18,6 +20,7 @@ import kotlin.collections.HashMap
 internal class MethodCallHandlerImpl(
     private val packageManager: PackageManager,
     private val windowManager: WindowManager,
+    private val packageName: String,
 ) : MethodCallHandler {
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
@@ -64,34 +67,52 @@ internal class MethodCallHandlerImpl(
             version["sdkInt"] = Build.VERSION.SDK_INT
             build["version"] = version
 
-            val display: Display = windowManager.defaultDisplay
-            val metrics = DisplayMetrics()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                display.getRealMetrics(metrics)
-            } else {
-                display.getMetrics(metrics)
-            }
-
-            val displayResult: MutableMap<String, Any> = HashMap()
-            displayResult["widthPx"] = metrics.widthPixels.toDouble()
-            displayResult["heightPx"] = metrics.heightPixels.toDouble()
-            displayResult["xDpi"] = metrics.xdpi
-            displayResult["yDpi"] = metrics.ydpi
-            build["displayMetrics"] = displayResult
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                build["serialNumber"] = try {
-                    Build.getSerial()
-                } catch (ex: SecurityException) {
-                    Build.UNKNOWN
-                }
-            } else {
-                build["serialNumber"] = Build.SERIAL
-            }
+            build["displayMetrics"] = getDisplayMetricsData()
+            build["serialNumber"] = getSerialNumber()
 
             result.success(build)
         } else {
             result.notImplemented()
+        }
+    }
+
+    private fun getDisplayMetricsData(): Map<String, Any> {
+        val display: Display = windowManager.defaultDisplay
+        val metrics = DisplayMetrics()
+        display.getRealMetrics(metrics)
+
+        val displayData: MutableMap<String, Any> = HashMap()
+        displayData["widthPx"] = metrics.widthPixels.toDouble()
+        displayData["heightPx"] = metrics.heightPixels.toDouble()
+        displayData["xDpi"] = metrics.xdpi
+        displayData["yDpi"] = metrics.ydpi
+
+        return displayData
+    }
+
+    /**
+     * Retrieval of serial number for Android apps that have required permission added
+     * Supression of lint is added because all required checks happen inside this function
+     */
+    @Suppress("MissingPermission", "Deprecation")
+    private fun getSerialNumber(): String {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return Build.SERIAL
+        } else {
+            val packageInfo =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    packageManager.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(PackageManager.GET_PERMISSIONS.toLong()))
+                } else {
+                    packageManager.getPackageInfo(packageName, PackageManager.GET_PERMISSIONS)
+                }
+            val hasRequiredPermission = packageInfo.requestedPermissions.contains("android.permission.READ_PRIVILEGED_PHONE_STATE")
+
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && hasRequiredPermission) {
+                Build.getSerial()
+            } else {
+                Build.UNKNOWN
+            }
+
         }
     }
 

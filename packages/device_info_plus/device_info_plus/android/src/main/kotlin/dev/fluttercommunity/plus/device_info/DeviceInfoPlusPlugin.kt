@@ -1,5 +1,6 @@
 package dev.fluttercommunity.plus.device_info
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.view.WindowManager
@@ -23,8 +24,9 @@ class DeviceInfoPlusPlugin : FlutterPlugin {
     private fun setupMethodChannel(messenger: BinaryMessenger, context: Context) {
         methodChannel = MethodChannel(messenger, "dev.fluttercommunity.plus/device_info")
         val packageManager: PackageManager = context.packageManager
+        val packageName: String = context.packageName
         val windowManager: WindowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val handler = MethodCallHandlerImpl(packageManager, windowManager)
+        val handler = MethodCallHandlerImpl(packageManager, windowManager, packageName)
         methodChannel.setMethodCallHandler(handler)
     }
 }
