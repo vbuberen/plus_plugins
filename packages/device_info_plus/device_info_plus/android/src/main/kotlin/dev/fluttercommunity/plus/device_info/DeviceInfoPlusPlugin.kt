@@ -1,6 +1,5 @@
 package dev.fluttercommunity.plus.device_info
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.view.WindowManager
